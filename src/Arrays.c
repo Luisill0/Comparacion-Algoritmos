@@ -25,3 +25,10 @@ void CopyArray(int A[],int B[],int length){
 		B[i]=A[i];
 	}
 }
+
+void Swap(int *a,int *b){
+	int aux;
+	aux=*a;
+	*a=*b;
+	*b=aux;
+}

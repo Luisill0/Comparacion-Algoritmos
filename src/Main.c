@@ -2,47 +2,79 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
-#include "Insercion.h"
+#include <sys/time.h>
 #include "Merge.h"
 #include "Arrays.h"
+#include "Insercion.h"
 
-#define N 50000
+#define N 1000
+
+void showUSec(long micros);
 
 int main(){
     int A[N],temp[N];
-    clock_t start_t, end_t, total_t;
-    
-    //printf("%d",INT_MAX);
+    struct timeval start,end;
+    long micros;
     
     FillRandom(A,N);
-    printf("Tam del arreglo a ordenar: %d\n\n",N);
+	
+	printf("Tam del arreglo a ordenar: %d\n\n",N);
+    
+     printf("\n---------------------------------------\n");
+    printf("Insertion\n"); 
+	CopyArray(A,temp,N); //Copia del arreglo original
+    
+    gettimeofday(&start,NULL); //Inicia reloj
+
+    InsertionSort(temp,N); //Ordena el arreglo
+
+    gettimeofday(&end,NULL); //Detiene reloj
+	
+	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
+
+    showUSec(micros); //Muestra el tiempo
+    
+    printf("\n---------------------------------------\n");
+    
+	printf("Merge-sort\n");
     CopyArray(A,temp,N);
     
-    start_t=clock();
-    printf("Insertion\nInicio: %ld\n",start_t);
+    gettimeofday(&start,NULL); //Inicia reloj
 
-    InsertionSort(temp,N);
+    MergeSort(temp,0,N-1); //Ordena el arreglo
 
-    end_t=clock();
-    printf("Fin: %ld\n",end_t);
+    gettimeofday(&end,NULL); //Detiene reloj
+	
+	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
 
-    total_t= (double)(end_t-start_t);
-    printf("Tiempo: %ld",total_t);
+    showUSec(micros); //Muestra el tiempo
     
-    putchar('\n');
+    printf("\n---------------------------------------\n");
     
+
+    printf("Bubble-sort\n");
     CopyArray(A,temp,N);
     
-    start_t=clock();
-    printf("Merge-sort\nInicio: %ld\n",start_t);
+    gettimeofday(&start,NULL); //Inicia reloj
 
-    MergeSort(temp,0,N-1);
+    Bubble(temp,N); //Ordena el arreglo
 
-    end_t=clock();
-    printf("Fin: %ld\n",end_t);
-    
-    total_t= (double)(end_t-start_t);
-    printf("Tiempo: %ld",total_t);
+    gettimeofday(&end,NULL); //Detiene reloj
+	
+	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
+
+    showUSec(micros); //Muestra el tiempo
+    printf("\n---------------------------------------\n");
+}
+
+void showUSec(long micros){
+	long temp;
+	if(micros>1000){
+		temp=micros/1000;
+		printf("%ld miliseconds  %ld microseconds",temp,micros%1000);
+	}else{
+		printf("%ld microseconds",micros);
+	}
 }
 
 
