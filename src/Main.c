@@ -7,7 +7,7 @@
 #include "Arrays.h"
 #include "Insercion.h"
 
-#define N 1000
+#define N 100000	//Tamaño del arreglo
 
 void showUSec(long micros);
 
@@ -18,9 +18,9 @@ int main(){
     
     FillRandom(A,N);
 	
-	printf("Tam del arreglo a ordenar: %d\n\n",N);
-    
-     printf("\n---------------------------------------\n");
+	printf("Tam del arreglo a ordenar: %d\n",N);
+	 
+    printf("\n---------------------------------------\n");
     printf("Insertion\n"); 
 	CopyArray(A,temp,N); //Copia del arreglo original
     
@@ -31,7 +31,7 @@ int main(){
     gettimeofday(&end,NULL); //Detiene reloj
 	
 	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
-
+	printf("%ld seconds   ",end.tv_sec - start.tv_sec);
     showUSec(micros); //Muestra el tiempo
     
     printf("\n---------------------------------------\n");
@@ -46,7 +46,7 @@ int main(){
     gettimeofday(&end,NULL); //Detiene reloj
 	
 	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
-
+	printf("%ld seconds   ",end.tv_sec - start.tv_sec);
     showUSec(micros); //Muestra el tiempo
     
     printf("\n---------------------------------------\n");
@@ -62,13 +62,14 @@ int main(){
     gettimeofday(&end,NULL); //Detiene reloj
 	
 	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
-
+	printf("%ld seconds   ",end.tv_sec - start.tv_sec);
     showUSec(micros); //Muestra el tiempo
     printf("\n---------------------------------------\n");
 }
 
 void showUSec(long micros){
 	long temp;
+	//Divide en milisegundos y microsegundos
 	if(micros>1000){
 		temp=micros/1000;
 		printf("%ld miliseconds  %ld microseconds",temp,micros%1000);
