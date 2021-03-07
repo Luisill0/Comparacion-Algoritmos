@@ -7,7 +7,7 @@
 #include "Arrays.h"
 #include "Insercion.h"
 
-#define N 100000	//Tamaño del arreglo
+#define N 10000	//Tamaño del arreglo
 
 void showUSec(long micros);
 
@@ -50,8 +50,7 @@ int main(){
     showUSec(micros); //Muestra el tiempo
     
     printf("\n---------------------------------------\n");
-    
-
+	
     printf("Bubble-sort\n");
     CopyArray(A,temp,N);
     
@@ -64,10 +63,12 @@ int main(){
 	micros = (end.tv_usec - start.tv_usec); //Calcula el tiempo en microsegundos
 	printf("%ld seconds   ",end.tv_sec - start.tv_sec);
     showUSec(micros); //Muestra el tiempo
+    
     printf("\n---------------------------------------\n");
 }
 
 void showUSec(long micros){
+	micros = abs(micros);
 	long temp;
 	//Divide en milisegundos y microsegundos
 	if(micros>1000){
